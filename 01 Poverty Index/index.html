@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Proverty Index</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css"> -->
+
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+    <style>
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: "Lobster";
+    }
+
+    h1 {
+      font-size: 84px;
+    }
+
+    h3 {
+      font-size: 32px;
+    }
+    /*p{font style:"font:message-box"}*/
+
+    </style>
+
+    <style>
+    body { font-family: 'Raleway', sans-serif; }
+
+    #chart-1 {position: relative;width: 960px;}
+    #chart-2 {position: relative;width: 960px;}
+    #chart-3 {position: relative;width: 960px;}
+    #chart-4 {position: relative;width: 960px;}
+    #chart-5 {position: relative;width: 960px;}
+
+    #info-display {
+      position: absolute;
+      top: 115px;
+      right: 50px;
+    }
+    svg { background: #f9f9f9; }
+
+    #chart-2 .bar{
+      fill: #DAA520;
+    }
+
+    #chart-2 .bar:hover{
+      fill: yellow;
+      stroke: gray;
+    }
+
+    text {
+      fill: #333;
+    }
+    /* Trying to change the color on some the heading*/
+    span {
+      font-weight:bold;
+      color:red;
+      cursor:pointer;
+    }
+    </style>
+
+  </head>
+
+  <body>
+    <div class="container">
+
+      <h1>Global Poverty Index</h1>
+      <p><i>A data visualization project for analyzing proportion of population below the international poverty line of US$1.90 per day between 1990 and 2013. <font size= "2px">(source: <a href="http://data.un.org/Data.aspx?q=poverty&d=SDGs&f=series%3aSI_POV_DAY1">UNData.org</a>)</font></i></p>
+      <br>
+      <h4><font color = "#566D7E">Description:</font></h4>
+      <p style="font-size:13px;"> Here are some graphics representing poverty rates of different areas across the world.
+        The poverty rate at $1.90 a day is the proportion of the population living on less than $1.90 a day, measured at 2005 international prices, adjusted for purchasing power parity (PPP).
+        Purchasing power parities (PPP) conversion factor, private consumption, is the number of units of a country’s currency required to buy the same amount of goods and services in the domestic market as a U.S. dollar would buy in the United States.
+        Further information on this proportion or poverty rates can be obtained from UNdata.org.
+      </a></p>
+
+      <h2>1. Distribution of poverty rates worldwide across a period of two decades</h2>
+      <h4><font color = "#566D7E">Observation:</font></h4>
+      <p style="font-size:13px;"> Each dot in the graph represents the poverty index of a region in a specific year.
+        The denser clusters of dots in the lower y-axis (or bottom of the graph) concludes that poverty rates for majority of areas lie below index 20.
+      </a></p>
+          <p style="font-weight:bold; color:gray; font-size:14px;"> Coding note</a>:</p>
+          <p style="font-size:13px;"> We represent each data by area and year in a cluster graph</a>.</p>
+      <div id="chart-1"></div>
+
+      <h2>2. Poverty rates across regions around the world in 2010.</h2>
+      <h4><font color = "#566D7E">Observation:</font></h4>
+      <p style="font-size:13px;"> The top 5 countries with the highest rates of population living under $1.90 are Madagascar, Malawi, Guinea-Bissau, Zambia, and Rwanda.
+         This clearly shows us that higher poverty rates dominate in African regions.
+      </a></p>
+
+      <p style="font-weight:bold; color:gray; font-size:14px;"> Coding note</a>:</p>
+      <p style="font-size:13px;"> We use d3-tip, mouseover and mouseout function in order to create "hover" effects, that is, to hide/show information on the Country and Poverty Rates for each bar</a>.</p>
+      <div id="chart-2"></div>
+
+
+      <h2>3. Distribution of poverty rates among top 5 countries with the highest index in 2010.</h2>
+      <h4><font color = "#566D7E">Observation:</font></h4>
+      <p style="font-size:13px;"> In our third graph, we combine ideas from the first graph with the second one, where we want to see how each of these 5 countries perform overall
+        in all the observed years since 1990. Guinea-Bissau, Madagascar, and Zambia have a similar fluctuating pattern where poverty rates seem to decrease at a certain point
+        and increased approaching 2010. On the other hand, Malawi and Rwanda share a decreasing pattern from the previous years. Note that the number of data gathered for each country may be different.
+      </a></p>
+
+      <p style="font-weight:bold; color:gray; font-size:14px;"> Coding note</a>:</p>
+      <p style="font-size:13px;"> To make the top 5 countries stand out in colors, we lower down the opacity of circles representing other countries in the graph.
+         We use .curve(d3.curveMonotoneX) to smoothen the colored curves that correspond to these top countries</a>.</p>
+      <div id="chart-3"></div>
+
+      <h2>4. Poverty rates comparison of countries in developing and less developed regions, between year 2000 and 2015.</h2>
+      <h4><font color = "#566D7E">Observation:</font></h4>
+      <p style="font-size:13px;"> We see that data between countries across the years are consistent: Least developed countries have the highest poverty rate,
+        followed by landlocked developing countries. Small island developing States come third, then developing regions come last with the least poverty rate.
+        More data gathered between 2010 and 2014 results in thicker opacity on the circles.
+      </a></p>
+
+      <p style="font-weight:bold; color:gray; font-size:14px;"> Coding note</a>:</p>
+      <p style="font-size:13px;"> We use d3.scaleSqrt() function to draw the proportion of these circles, and also scalePoint()
+        to create an x-axis for categorical range of years</a>.</p>
+      <div id="chart-4"></div>
+
+      <h2>5. Radial chart representation of the poverty proportions across countries worldwide between 1990 and 2014.</h2>
+      <h4><font color = "#566D7E">Observation:</font></h4>
+      <p style="font-size:13px;"> Each line starting 0 degree (vertical) represents the year since 1990, and the year increases as the line moves in in clockwise direction.
+        Each area or country is placed at certain radii from the center of the circle, indended to show that the poverty rate is higher as the country name moves away from the center.
+        Equivalently, the closer it is to the center, the lower the percentage of that area's poverty rate. It is definitely interesting to see that those at the farthest points
+        from the center are mostly African countries. This also validates our hypothesis in #2 that in fact African countries make up majority of the poorest areas in the world.
+      </a></p>
+
+      <p style="font-weight:bold; color:gray; font-size:14px;"> Coding note</a>:</p>
+      <p style="font-size:13px;"> The radialLine() function is used in this graph, along with scaleLinear() and scalePoint() to draw the lines at certain angles and radius
+        and color spectrum. It is actually pretty fun</a>!</p>
+      <div id="chart-5"></div>
+      <br><br>
+      <p style="font-size:9px;"><i><a href="https://moorissa.github.io/storytelling-projects/">Back to homepage</a><i></p>
+
+    <!-- This is D3, our graphing library -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+    <!--
+      This is d3-tip, which will give us d3 tooltips
+      https://github.com/Caged/d3-tip
+    -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+      <link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
+
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+      <!-- Now we include our actual visualization -->
+      <script src="chart-1.js"></script>
+      <script src="chart-2.js"></script>
+      <script src="chart-3.js"></script>
+      <script src="chart-4.js"></script>
+      <script src="chart-5.js"></script>
+    </div>
+  </body>
+</html>

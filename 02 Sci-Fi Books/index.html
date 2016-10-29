@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sci-Fi</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.0/css/swiper.min.css"> -->
+
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+    <style>
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: "Lobster";
+    }
+
+    h1 {
+      font-size: 84px;
+    }
+
+    h3 {
+      font-size: 32px;
+    }
+
+    </style>
+
+    <style>
+    body {
+      font-family: "Helvetica Neue";
+      font-weight: 300;
+    }
+    svg { background: #f9f9f9; }
+
+    #chart-1 {
+      position: relative;
+      width: 960px;
+    }
+
+    #info-display {
+      position: absolute;
+      top: 115px;
+      right: 50px;
+    }
+
+    .wrapper {
+      text-align: center;
+    }
+
+    circle {
+      stroke-width: 0.25;
+      stroke: black;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Top 100 Sci-fi Books</h1>
+      <p style="font:message-box"><i>A visualization project for <strong>top 100 science fiction books</strong> of 2016. <font-size="8px"><font size = 1px>(source: <a href="http://www.goodreads.com/list/show/19341.Best_Science_Fiction">Goodreads data</a>)</font></i></p>
+      <br><h3><font color="#008ec6">About</font></h3>
+      <p style="font:message-box">"Science fiction is a genre of fiction dealing with imaginary but more or less plausible (or at least non-supernatural) content such as future settings, futuristic science and technology, space travel, aliens, and paranormal abilities. </p>
+
+      <p style="font:message-box">It is similar to, but differs from fantasy in that, within the context of the story, its imaginary elements are largely possible within scientifically established or scientifically postulated laws of nature (though some elements in a story might still be pure imaginative speculation)." <i>- Wikipedia</i></p>
+
+      <p style="font:message-box">We will look at scatterplot graphs to visualize two relationships: (1) between rankings of sci-fi books and the number of ratings, and (2) between rankings of sci-fi books and the year published.</p>
+      <br>
+
+      <div class="wrapper">
+        <div id = "buttons">
+          <input onclick="window.location.href='../'" style="font:message-box;width:120px;" type="submit" value="<< Back" id = "back" class = "back">
+          <input onclick="window.location.href='index1.html'" style="font:message-box;width:120px;" type="submit" value="Next >>" id = "next" class = "next">
+        </div>
+      </div>
+
+      <br><br>
+      <p style="font-size:9px;"><i><a href="https://moorissa.github.io/storytelling-projects/">Back to homepage</a><i></p>
+    </div>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+    <script src="visualization.js"></script>
+  </body>
+</html>
