@@ -13,8 +13,15 @@
 
     <style>
 
+    body{
+       background: url(bg-scifi.jpeg);
+       background-size: 1440px 800px;
+       background-repeat:no-repeatdisplay: compact;
+     }
+
     h1, h2, h3, h4, h5, h6 {
       font-family: "Lobster";
+      color: #ffffcc;
     }
 
     h1 {
@@ -31,22 +38,35 @@
     body {
       font-family: "Helvetica Neue";
       font-weight: 300;
+      color: #f2f2f2;
     }
-    svg { background: #f9f9f9; }
+    svg { background: #fff; }
 
     #chart-1 {
       position: relative;
       width: 960px;
     }
 
+    #buttons {
+      background-color: none;
+      border: none;
+      color: darkblue;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+    }
+
     #info-display {
+      color:#f2f2f2
       position: absolute;
       top: 115px;
       right: 50px;
     }
 
     .wrapper {
-      text-align: center;
+      text-align: right;
     }
 
     circle {
@@ -59,12 +79,19 @@
     <div class="container">
       <h1>Top 100 Sci-fi Books</h1>
       <p style="font:message-box"><i>A visualization project for <strong>top 100 science fiction books</strong> of 2016. <font-size="8px"><font size = 1px>(source: <a href="http://www.goodreads.com/list/show/19341.Best_Science_Fiction">Goodreads data</a>)</font></i></p>
-      <br><h3><font color="#008ec6">About</font></h3>
+      <br>
+      <h3><font color="#008ec6">About</font></h3>
       <p style="font:message-box">"Science fiction is a genre of fiction dealing with imaginary but more or less plausible (or at least non-supernatural) content such as future settings, futuristic science and technology, space travel, aliens, and paranormal abilities. </p>
 
       <p style="font:message-box">It is similar to, but differs from fantasy in that, within the context of the story, its imaginary elements are largely possible within scientifically established or scientifically postulated laws of nature (though some elements in a story might still be pure imaginative speculation)." <i>- Wikipedia</i></p>
 
-      <p style="font:message-box">We will look at scatterplot graphs to visualize two relationships: (1) between rankings of sci-fi books and the number of ratings, and (2) between rankings of sci-fi books and the year published.</p>
+      <p style="font:message-box">The scatterplot graphs in the next pages will allow you to visualize the relationships between:
+        <br> &ensp; &ensp; &ensp;(1) between rankings of sci-fi books and the number of ratings, and
+        <br> &ensp; &ensp; &ensp;(2) between rankings of sci-fi books and the year published.<p>
+      <p style="font:message-box">
+      Each circle represents a particular book. You can hover over the circle to display more information on the title, author, year published, and rating score of the book.
+      <br>Click on the circle to be directed to the Goodread's site of the book.</p>
+
       <br>
 
       <div class="wrapper">
