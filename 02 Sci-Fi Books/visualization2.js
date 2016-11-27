@@ -1,14 +1,18 @@
 (function() {
-    var margin = { top: 50, left: 50, right: 50, bottom: 50},
-    height = 500 - margin.top - margin.bottom,
-    width = 920 - margin.left - margin.right;
-    padding = -60;
+  var margin = { top: 50, left: 50, right: 50, bottom: 50},
+      height = 500 - margin.top - margin.bottom,
+      width = 920 - margin.left - margin.right;
+      padding = -60;
 
   var svg = d3.select("#chart-1")
         .append("svg")
         .attr("height", height + margin.top + margin.bottom)
         .attr("width", width + margin.left + margin.right)
         .append("g")
+        // .attr("display","block")
+        // .attr("margin","auto")
+        // .attr("align","center")
+        // .attr("fill","white")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   var xPositionScale = d3.scaleLinear().domain([1864,2014]).range([0, width]); // outlier detected: with rating count of 4M+
@@ -28,7 +32,7 @@
 
   // Adding Title
   var textTitle = svg.append("text")
-      .attr("fill","black")
+      .attr("fill","lightblue")
       .text("Book Rankings by the Year Published")
       .attr("x",width/2)
       .attr("y",-10)
@@ -78,7 +82,9 @@
     // Make a circle change color when you hover over it.
     .on('mouseover', function(d) {
       var el = d3.select(this);
-      el.style('fill', "yellow")
+      el.style('fill', "maroon")
+      el.style('stroke', "red")
+      el.style('stroke-width', "3")
 
       // #2) When you hover over a marker, append the information display on the right handside of the chart.
       d3.select("#name")
@@ -95,10 +101,17 @@
     .on('mouseout', function(d) {
       var el1 = d3.select(this);
       el1.style('fill', colorScale(d.published))
-      //el1.style('opacity',1)
+      el1.style('stroke','black')
+      el1.style('stroke-width',0.2)
       d3.select("#info-display")
         .style("display","none")
     })
+    .on('click', function(d) {
+      if (d.book_url !== "") {
+         window.open(d.book_url,'_blank' // <- '_blank' is what makes it open in a new window.
+         );
+      }
+    });
 
   d3.select("#info-display")
     .style("display","none")
@@ -374,22 +387,24 @@
     // Setting the x and y axis
     var xAxis = d3.axisBottom(xPositionScale);
     svg.append("g")
-      .attr("class", "axis x-axis")
+      .attr("class", "axisgray")
       .attr("transform", "translate(0," + (height) + ")")
       .call(xAxis);
 
     var yAxis = d3.axisLeft(yPositionScale);
     svg.append("g")
-      .attr("class", "axis y-axis")
+      .attr("class", "axisgray")
       .call(yAxis);
 
     // Adding Axis Labels
     svg.append("text")
+        .attr("fill","lightblue")
         .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
         .attr("transform", "translate("+ (padding/2) +","+(height/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
         .text("Rank");
 
     svg.append("text")
+        .attr("fill","lightblue")
         .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
         .attr("transform", "translate("+ (width/2) +","+(height-((padding-60)/3))+")")  // centre below axis
         .text("Year Published");
