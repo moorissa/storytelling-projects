@@ -31,22 +31,53 @@
     body {
       font-family: "Helvetica Neue";
       font-weight: 300;
+      color: #f2f2f2;
+      background: url(bg-scifi.jpeg);
+      background-size: 1440px 800px;
+      background-repeat:no-repeatdisplay: compact;
     }
-    svg { background: #f9f9f9; }
+    svg {
+      font-family: "Helvetica Neue";
+      font-weight: 300;
+      color: #f2f2f2;
+      display: block;
+      margin: auto;
+      background: transparent
+    }
 
     #chart-1 {
+      /*stroke:#008ec6;*/
       position: relative;
       width: 960px;
     }
 
+    .axisgray line{
+      stroke: gray;
+    }
+    .axisgray path{
+      stroke: gray;
+    }
+    .axisgray text{
+      stroke: gray;
+    }
+
     #info-display {
       position: absolute;
-      top: 115px;
-      right: 50px;
+      top: 335px;
+      right: 20px;
     }
 
     .wrapper {
-      text-align: center;
+      text-align: right;
+    }
+
+    #buttons {
+      background-color: none;
+      border: none;
+      color: darkblue;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
     }
 
     circle {
@@ -57,35 +88,37 @@
   </head>
   <body>
     <div class="container">
-      <h1>Top 100 Sci-fi Books</h1>
+      <!-- <h1>Top 100 Sci-fi Books</h1>
       <p style="font:message-box"><i>A visualization project for <strong>top 100 science fiction books</strong> of 2016. <font-size="8px"><font size = 1px>(source: <a href="http://www.goodreads.com/list/show/19341.Best_Science_Fiction">Goodreads data</a>)</font></i></p>
-      <br>
+      <br> -->
       <h3><font color="#008ec6">Ranking by Number of Ratings</font></h3><br>
       <div id="chart-1">
         <div class="row">
 
           <div class="col-md-12">
             <div id = "buttons">
-              <strong style="font:message-box"><i>Filter by the author's gender</i>&nbsp; : </strong>
+              <strong style="font:message-box;color:#f2f2f2"><i>Filter by the author's gender</i>&nbsp; : </strong>
               <input  style="font:message-box;width:120px" type="submit" value="All Genders" id = "FM" class = "FM">
               <input  style="font:message-box;width:120px" type="submit" value="Male" id = "M" class = "M">
               <input  style="font:message-box;width:120px" type="submit" value="Female" id = "F" class = "F">
               <br>
-              <strong style="font:message-box"><i>Filter by the award type</i> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: </strong>
+              <strong style="font:message-box;color:#f2f2f2"><i>Filter by the award type</i> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;: </strong>
               <input  style="font:message-box;width:120px" type="submit" value="All Awards" id = "all" class = "all">
               <input  style="font:message-box;width:120px" type="submit" value="Hugo Nominee" id = "hugoN" class = "hugoN">
               <input  style="font:message-box;width:120px" type="submit" value="Hugo Winner" id = "hugoW" class = "hugoW">
               <input  style="font:message-box;width:120px" type="submit" value="Nebula Nominee" id = "nebulaN" class = "nebulaN">
               <input  style="font:message-box;width:120px" type="submit" value="Nebula Winner" id = "nebulaW" class = "nebulaW">
               <input  style="font:message-box;width:120px" type="submit" value="No Awards" id = "no" class = "no">
+              <br><br>
+              <p style="font:message-box; color:gray"><i>Click on circles to be directed to the Goodread's site.</i></p>
             </div>
           </div>
 
           <div class="col-md-4" id="info-display">
-            <font style="font:message-box"><strong>Author: </strong><span id="name">Unknown</span></font><br>
-            <font style="font:message-box"><strong>Book Title: </strong><span id="title">Unknown</span></font><br>
-            <font style="font:message-box"><strong>Year Published: </strong> <span id="year">Unknown</span></font><br>
-            <font style="font:message-box"><strong>Rating Score: </strong> <span id="rating">Unknown</span></font><br>
+            <font style="font:message-box"><strong><font style="color:gray">Author: </font></strong><span id="name">Unknown</span></font><br>
+            <font style="font:message-box"><strong><font style="color:gray">Book Title: </font></strong><span id="title">Unknown</span></font><br>
+            <font style="font:message-box"><strong><font style="color:gray">Year Published: </font></strong> <span id="year">Unknown</span></font><br>
+            <font style="font:message-box"><strong><font style="color:gray">Rating Score: </font></strong> <span id="rating">Unknown</span></font><br>
           </div>
         </div>
 
@@ -98,7 +131,6 @@
         </div>
       </div>
 
-      <br><br>
       <p style="font-size:9px;"><i><a href="https://moorissa.github.io/storytelling-projects/">Back to homepage</a><i></p>
     </div>
 
