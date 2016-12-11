@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Marvel vs DC - a D3.js take</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/icon" href="assets/images/favicon.ico"/>
+    <!-- Font Awesome -->
+    <link href="assets/css/font-awesome.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!-- Slick slider -->
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.css"/>
+    <!-- Animate css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css"/>
+    <!-- Theme color -->
+    <link id="switcher" href="assets/css/theme-color/default-theme.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/easy-autocomplete.min.css">
+    <link rel="stylesheet" href="assets/css/easy-autocomplete.themes.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+
+    <!-- Main Styles -->
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/scrolly-style.css"/>
+
+    <!-- Fonts -->
+    <!-- Open Sans for body font -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!-- Cabin for Title -->
+    <link href='https://fonts.googleapis.com/css?family=Cabin' rel='stylesheet' type='text/css'>
+
+    <link href="https://fonts.googleapis.com/css?family=News+Cycle" rel="stylesheet">
+
+    <style>
+
+        #newlanding
+        {
+          font-family: 'News Cycle', sans-serif;
+        }
+
+        #chart_1a_bar .bar,
+        #chart-1a_bar .bar  {
+            fill: lightblue;
+        }
+
+        #chart_1a_bar .bar:hover,
+        #chart_1a_bar .bar:hover {
+            fill: steelblue;
+        }
+        .d3-tip {
+            line-height: 1;
+            border: 1
+            font-weight: normal;
+            padding: 12px;
+            background: rgba(250, 250, 250, 250);
+            border-radius: 4px;
+            z-index: 20;
+        }
+
+        .d3-tip:after {
+            box-sizing: border-box;
+            display: inline;
+            font-size: 10px;
+            width: 100%;
+            line-height: 1;
+            color: rgba(250, 250, 250, 250);
+            content: "\25BC";
+            position: absolute;
+            text-align: center;
+        }
+
+        .d3-tip.n:after {
+            margin: -1px 0 0 0;
+            top: 100%;
+            left: 0;
+        }
+        .marvel{
+            background-image: url("assets/images/marvel-characters.png");
+            z-index: 5;
+        }
+        .dc{
+            background-image: url("assets/images/dc-characters.png");
+            z-index: 5;
+        }
+        span.newer{
+            color: brown;
+        }
+
+        .backimage {
+           background-size: cover;
+           background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('assets/images/marvelvsdc.jpg');
+           background-position:center;
+           height: 500px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+
+
+  <header id="header">
+    <div class="header-inner">
+        <!-- Header image -->
+        <div class="backimage"></div>
+
+        <div class="overlay">
+            <div class="header-content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="header-top">
+                                <!-- Start logo area -->
+                                <!-- End logo area -->
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="header-bottom">
+                                <div class="row">
+                                    <div class="col-md-9 col-md-offset-2" style="margin-top:-100px;">
+                                        <div class="header-bottom-left">
+                                            <h1 id="newlanding">Marvel vs DC: With Data and D3</h1>
+                                            <p>
+                                              An attempt to settle the age-old fight with data and visualizations.
+                                              <br/><br/>
+                                              Since the 1930s, Marvel and DC Comics have had a friendly rivalry, stemming from the comic book pages and now transcending onto the big screen.<br/>
+                                              Many of them have deep and well-established backgrounds that go beyond just pages and screens, but where do they come from in the first place? How are they different? Are Marvel characters stronger than their DC counterparts?
+                                              <!-- Do they all use their gift of superpowers for good? -->
+                                              <br/><br/>
+                                              Use the visualizations below to compare their origins, superpowers, and see if you could plot other attribute differences between them!
+                                              <br/><br/><br/><br/>
+                                            </p>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div class="header-bottom-right">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+  <section id="howit-works">
+    <div class="howit-works-area">
+        <!--<div class="container">-->
+        <div class="col-md-12">
+            <div class="title-area">
+                <h2 class="title"><span>Where</span> do they come from?</h2>
+                <p>Start by pinpointing the circles to see each character's name, birthplace, and power level on a scale of 0 to 100. <br/>The size of circles is based on power.
+                Use the dropdown menu to compare the characters' origin based on race.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 wow fadeInLeft marvel" data-wow-duration="0.5s" data-wow-delay="0.5s" >
+                <center>
+
+                   <div class="menuvar" style="margin-top: 50px;">
+                     <p align="right">Select Race:</p>
+                     <!-- <p align="right">Select Alignment:</p> -->
+                   </div>
+
+                   <!-- <div class="menuvar1" style="margin-top: 15px;">
+                     <p align="right">Select Alignment:</p>
+                   </div> -->
+
+                    <div id="map_2a">
+                        <br>
+                    </div>
+
+                </center>
+            </div>
+
+            <div class="col-md-6 wow fadeInRight dc" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                <center>
+                    <div class="dropmenu" style="margin-top: 50px; margin-left: -465px; margin-right: auto; width: 1010px;">
+                      <!-- <p> -->
+                      <select name="race-list">
+                        <option value="All">All</option>
+                        <option value="Alien">Alien</option>
+                        <option value="God">God</option>
+                        <option value="Human">Human</option>
+                        <option value="Inhuman">Inhuman</option>
+                        <option value="Mutant">Mutant</option>
+                        <option value="Robot">Robot</option>
+                        <option value="Unknown">Unknown</option>
+                      </select>
+                    <!-- </p>
+                      <select name="alignment-list">
+                        <option value="All">All</option>
+                        <option value="Bad">Bad</option>
+                        <option value="Good">Good</option>
+                        <option value="Neutral">Neutral</option>
+                      </select> -->
+                    </div>
+
+                    <!-- <div class="dropmenu1" style="margin-top: 10px; margin-left: -465px; margin-right: auto; width: 1010px;">
+                      <select name="alignment-list">
+                        <option value="All">All</option>
+                        <option value="Bad">Bad</option>
+                        <option value="Good">Good</option>
+                        <option value="Neutral">Neutral</option>
+                      </select>
+                    </div> -->
+
+                    <div id="map_2b">
+                        <br>
+                    </div>
+
+                </center>
+            </div>
+        </div>
+        <center><br/>
+        <p><i>There are much less datapoints shown as DC characters. This makes sense because majority of DC characters <br>live in fictitious cities like Gotham, Metropolis, Starling City etc.
+          Marvel has more references to real world incidents <br>such as the world wars, and most of the characters live in New York.</i></p>
+      </center>
+    </div>
+</section>
+
+
+
+<section id="screenshot">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title-area wow fadeInUp">
+                <h2 class="title"><span>Who</span> is more powerful?</h2>
+                <p>Type in the search box below to select your Marvel and DC character, or use the 'Random' button to choose randomly.
+                  <br/>Perimeters of the circle indicate the ability level of selected character, with the smallest size being<br> 0 level and the largest is 100.
+               We will keep your recent comparisons up to five searches.</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <center>
+            <button id="random_btn" class="btn btn-primary">Random</button>
+        </center>
+        <br/>
+    </div>
+    <div class="row">
+        <div class="col-md-6 wow fadeInLeft marvel" data-wow-duration="0.5s" data-wow-delay="0.5s" >
+            <div id="chart_a1">
+                <center>
+                    Select a Superhero : <input id="trigger-event1" />
+                </center>
+            </div>
+        </div>
+
+        <div class="col-md-6 wow fadeInRight dc" data-wow-duration="0.5s" data-wow-delay="0.5s">
+            <div id="chart_a2">
+                <center>
+                    Select a Superhero : <input id="trigger-event2" />
+                </center>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.5s" >
+            <div id="chart_a3">
+            </div>
+        </div>
+
+        <div class="col-md-6 wow fadeInRight " data-wow-duration="0.5s" data-wow-delay="0.5s">
+            <div id="chart_a4">
+            </div>
+        </div>
+    </div>
+    <!--</div>--><br/><br/>
+    <center>
+    <p><i>In the recent movie <a href="http://www.imdb.com/title/tt2975590/">Batman v. Superman (2016)</a>, Superman was deemed stronger than Batman,<br/>but both are DC characters.
+    Now that you could compare a character from Marvel and a character from DC, <br/>who do you think would win in the movie Iron-Man v. Superman (20XX)?</i> </p>
+    </center><br/><br/>
+</section>
+
+
+    <section id="scrollytelling">
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="title-area wow fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+              <h2 class="title">Can you find more <span>differences?</span></h2>
+              <p>Let's see some other attributes of the characters, such as strength, gender and alignment, even eye colors!</p>
+            </div>
+          </div>
+            <div class="col-md-12">
+                <div id='graphic'>
+                  <div id='sections'>
+                    <section class="step">
+                      <div class="title">Question Starters:</div>
+                      1. Are heavier superheroes stronger? Do <b style="color:lightblue">men</b> have more strength than <b style="color:pink">women</b>?<br/><br/>
+                      2. How many more superheroes are there than supervillains?<br/><br/>
+                    </section>
+                    <section class="step">
+                      <div class="title">1. Weight v. Strength:</div>
+                      <i> Look at the scatterplot on the right. </i><br/>
+                      <br/>Although <b style="color:pink">female</b> superheroes tend to have lower bodyweight, many of them are stronger than the heavier <b style="color:lightblue">male</b> superheroes!
+                    </section>
+                    <section class="step">
+                      <div class="title">2. Good v. Bad v. Neutral:</div>
+                      <i>Look at the clusters on the right. </i><br/><br/>
+                      While a few are neutrals, there are clearly more good heroes than bad villains! Are <b style="color:lightblue">men</b> more likely than <b style="color:pink">women</b> to become<b> good</b> heroes?
+                    </section>
+                    <section class="step">
+                      <div class="title">Now let's do something completely whacky!</div>
+                      <i> Let's group them by their eye colors! </i><br/>
+                    </section>
+                  </div>
+                  <div id='vis'>
+                  </div>
+                  <div id="extra-space">
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+
+</div>
+
+
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<!-- Bootstrap -->
+<script src="assets/js/bootstrap.js"></script>
+<!-- Slick Slider -->
+<script type="text/javascript" src="assets/js/slick.js"></script>
+<!-- Wow animation -->
+<script type="text/javascript" src="assets/js/wow.js"></script>
+<!-- Off-canvas Menu -->
+<script src="assets/js/classie.js"></script>
+
+<!-- Custom js -->
+<script type="text/javascript" src="assets/js/custom.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.4.0/d3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+<script src="https://d3js.org/topojson.v1.min.js"></script>
+<script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="assets/js/jquery.easy-autocomplete.min.js"></script>
+
+
+<script type="text/javascript" src="assets/visuals/map_2a.js"></script>
+<script type="text/javascript" src="assets/visuals/map_2b.js"></script>
+
+<script type="text/javascript" src="assets/visuals/chart_a1.js"></script>
+<script type="text/javascript" src="assets/visuals/chart_a2.js"></script>
+<script src="js/queue.js"></script>
+<script src="js/scroller.js"></script>
+<script src="js/sections.js"></script>
+</body>
+</html>
